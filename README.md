@@ -58,17 +58,17 @@ Tem como principal objetivo organizar e gerenciar um estacionamento, coletando d
     - classificacao: String
     - idade: int
     - adimplente: boolean
-    + Cliente(veiculos: Arraylist~Veiculo~, frequencia: int, classificacao: String, nome: String, cpf: String): void
+    + Cliente(veiculos: Arraylist~Veiculo~, frequencia: int, classificacao: String, nome: String, cpf: String) void
     + getVeiculos(): ArrayList~Veiculo~
-    + setVeiculos(veiculos: ArrayList~Veiculo~): void
-    + getFrequencia(): int
-    + setFrequencia(frequencia: int): void
-    + getClassificacao(): String
-    + setClassificacao(classificacao: String): void
-    + getIdade(): int
-    + setIdade(idade: int): void
-    + isAdimplente(): boolean
-    + setAdimplente(boolean adimplente): void
+    + setVeiculos(veiculos: ArrayList~Veiculo~) void
+    + getFrequencia() int
+    + setFrequencia(frequencia: int) void
+    + getClassificacao() String
+    + setClassificacao(classificacao: String) void
+    + getIdade() int
+    + setIdade(idade: int) void
+    + isAdimplente() boolean
+    + setAdimplente(boolean adimplente) void
     + toString() String
     + equals(Object) boolean
     + hashCode() int
@@ -79,15 +79,15 @@ Tem como principal objetivo organizar e gerenciar um estacionamento, coletando d
     - ano: String
     - placa: String
     - tipo: String
-    + Veiculo(marcaModelo: String, ano: String, placa, String, tipo: String): void
-    + getMarcaModelo(): String
-    + setMarcaModelo(marcaModelo: String): void
-    + getAno(): String
-    + setAno(ano: String): void
-    + getPlaca(): String
-    + setPlaca(placa: String): void
-    + getTipo(): String
-    + setTipo(tipo: String): void
+    + Veiculo(marcaModelo: String, ano: String, placa, String, tipo: String) void
+    + getMarcaModelo() String
+    + setMarcaModelo(marcaModelo: String) void
+    + getAno() String
+    + setAno(ano: String) void
+    + getPlaca() String
+    + setPlaca(placa: String) void
+    + getTipo() String
+    + setTipo(tipo: String) void
     + toString() String
     + equals(Object) boolean
     + hashCode() int
@@ -99,17 +99,17 @@ Tem como principal objetivo organizar e gerenciar um estacionamento, coletando d
     - preferencial: boolean
     - ocupada: boolean
     - veiculo: Veiculo
-    + Vaga(numero: int, tipo: String, preferencial: boolean, ocuapada: boolean): void
-    + getnumero(): int
-    + setNumero(numero: int): void
-    + getTipo(): String
-    + setTipo(tipo: String): void
-    + isPreferencial(): boolean
-    + setPreferencial(preferencial: boolean): void
-    + isOcupada(): boolean
-    + setOcupada(ocupada: boolean): void
-    + getVeiculo(): Veiculo
-    + setVeiculo(veiculo: Veiculo): void
+    + Vaga(numero: int, tipo: String, preferencial: boolean, ocuapada: boolean) void
+    + getnumero() int
+    + setNumero(numero: int) void
+    + getTipo() String
+    + setTipo(tipo: String) void
+    + isPreferencial() boolean
+    + setPreferencial(preferencial: boolean) void
+    + isOcupada() boolean
+    + setOcupada(ocupada: boolean) void
+    + getVeiculo() Veiculo
+    + setVeiculo(veiculo: Veiculo) void
     + toString() String
     + equals(Object) boolean
     + hashCode() int
@@ -119,13 +119,13 @@ Tem como principal objetivo organizar e gerenciar um estacionamento, coletando d
     - tipo: String
     - veiculosEnvolvidos: ArrayList~Veiculo~
     - envolvidos: List~Cliente~ 
-    + Ocorrencia(tipo: String, veiculosEnvolvidos: ArrayList~Veiculo~, envolvidos: ArrayList~Cliente~): void
-    + getipo(): String
-    + settipo(tipo: String): void
-    + getVeiculosEnvolvidos(): ArrayList~Veiculo~
-    + setVeiculosEnvolvidos(veiculosEnvolvidos~ ArrayList~Veiculo~): void
-    + getEnvolvidos(): ArrayList~Cliente~
-    + setEnvolvidos(envolvidos: ArrayList~Cliente~): void
+    + Ocorrencia(tipo: String, veiculosEnvolvidos: ArrayList~Veiculo~, envolvidos: ArrayList~Cliente~) void
+    + getipo() String
+    + settipo(tipo: String) void
+    + getVeiculosEnvolvidos() ArrayList~Veiculo~
+    + setVeiculosEnvolvidos(veiculosEnvolvidos~ ArrayList~Veiculo~) void
+    + getEnvolvidos() ArrayList~Cliente~
+    + setEnvolvidos(envolvidos: ArrayList~Cliente~) void
     + toString() String
     + equals(Object) boolean
     + hashCode() int
