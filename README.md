@@ -1,4 +1,4 @@
-# 🚗 Gerenciador de Carro
+# 🚗 Gerenciador de Estacionamento
 
 Projeto desenvolvido como parte da atividade avaliativa da Universidade Federal Rural de Pernambuco (UFRPE).  
 O **Gerenciador de Estacionamento** é uma aplicação simples e intuitiva que ajuda no controle e monitoramento de veículos, voltado para usuários que desejam monitorar o estacionamento de seu estabelecimento.
