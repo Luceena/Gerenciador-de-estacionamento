@@ -11,13 +11,13 @@ public class Cliente extends Pessoa {
     private int idade;
     private boolean adimplente;
 
-    public Cliente(ArrayList<Veiculo> veiculos, int frequencia, String classificacao, String nome, String cpf, int idade, boolean adimplente) {
+    public Cliente(ArrayList<Veiculo> veiculos, String nome, String cpf, int idade) {
         super(nome, cpf);
         this.veiculos = veiculos;
-        this.frequencia = frequencia;
-        this.classificacao = classificacao;
+        this.frequencia = 0;
+        this.classificacao = "neutra";
         this.idade = idade;
-        this.adimplente = adimplente;
+        this.adimplente = true;
     }
 
     public ArrayList<Veiculo> getVeiculos() {

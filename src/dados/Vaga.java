@@ -6,15 +6,13 @@ import java.util.Objects;
 public class Vaga {
     private int numero;
     private String tipo;
-    private boolean pcd;
-    private boolean idoso;
+    private boolean preferencial;
     private boolean ocupada;
 
-    public Vaga(int numero, String tipo, boolean pcd, boolean idoso, boolean ocupada) {
+    public Vaga(int numero, String tipo, boolean preferencial, boolean ocupada) {
         this.numero = numero;
         this.tipo = tipo;
-        this.pcd = pcd;
-        this.idoso = idoso;
+        this.preferencial = preferencial;
         this.ocupada = ocupada;
     }
 
@@ -34,22 +32,15 @@ public class Vaga {
         this.tipo = tipo;
     }
 
-    public boolean isPcd() {
-        return pcd;
+    public boolean isPreferencial() {
+        return preferencial;
     }
 
-    public void setPcd(boolean pcd) {
-        this.pcd = pcd;
+    public void setPreferencial(boolean preferencial) {
+        this.preferencial = preferencial;
     }
-
-    public boolean isIdoso() {
-        return idoso;
-    }
-
-    public void setIdoso(boolean idoso) {
-        this.idoso = idoso;
-    }
-
+    
+    
     public boolean isOcupada() {
         return ocupada;
     }
@@ -60,17 +51,15 @@ public class Vaga {
 
     @Override
     public String toString() {
-        return "Vaga{" + "numero=" + numero + ", tipo=" + tipo + ", pcd=" + pcd + ", idoso=" + idoso + ", ocupada=" + ocupada + '}';
+        return "Vaga{" + "numero=" + numero + ", tipo=" + tipo + ", preferencial=" + preferencial + ", ocupada=" + ocupada + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + this.numero;
-        hash = 79 * hash + Objects.hashCode(this.tipo);
-        hash = 79 * hash + (this.pcd ? 1 : 0);
-        hash = 79 * hash + (this.idoso ? 1 : 0);
-        hash = 79 * hash + (this.ocupada ? 1 : 0);
+        int hash = 3;
+        hash = 47 * hash + this.numero;
+        hash = 47 * hash + Objects.hashCode(this.tipo);
+        hash = 47 * hash + (this.ocupada ? 1 : 0);
         return hash;
     }
 
@@ -89,10 +78,7 @@ public class Vaga {
         if (this.numero != other.numero) {
             return false;
         }
-        if (this.pcd != other.pcd) {
-            return false;
-        }
-        if (this.idoso != other.idoso) {
+        if (this.preferencial != other.preferencial) {
             return false;
         }
         if (this.ocupada != other.ocupada) {
@@ -100,6 +86,9 @@ public class Vaga {
         }
         return Objects.equals(this.tipo, other.tipo);
     }
+
+
+   
     
     
     
