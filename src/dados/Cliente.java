@@ -3,6 +3,7 @@ package dados;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
 public class Cliente extends Pessoa {
     private ArrayList<Veiculo> veiculos;
     private int frequencia;
@@ -11,16 +12,7 @@ public class Cliente extends Pessoa {
     private boolean adimplente;
 
     public Cliente(ArrayList<Veiculo> veiculos, String nome, String cpf, int idade) {
-        super(Objects.requireNonNull(nome, "Nome não pode ser nulo"),
-              Objects.requireNonNull(cpf, "CPF não pode ser nulo"));
-        
-        if (veiculos == null) {
-            throw new IllegalArgumentException("A lista de veículos não pode ser nula.");
-        }
-        if (idade < 18) {
-            throw new IllegalArgumentException("Idade não pode ser menor que 18.");
-        }
-
+        super(nome, cpf);
         this.veiculos = veiculos;
         this.frequencia = 0;
         this.classificacao = "neutra";
@@ -33,9 +25,6 @@ public class Cliente extends Pessoa {
     }
 
     public void setVeiculos(ArrayList<Veiculo> veiculos) {
-        if (veiculos == null) {
-            throw new IllegalArgumentException("A lista de veículos não pode ser nula.");
-        }
         this.veiculos = veiculos;
     }
 
@@ -44,9 +33,6 @@ public class Cliente extends Pessoa {
     }
 
     public void setFrequencia(int frequencia) {
-        if (frequencia < 0) {
-            throw new IllegalArgumentException("Frequência não pode ser negativa.");
-        }
         this.frequencia = frequencia;
     }
 
@@ -55,7 +41,7 @@ public class Cliente extends Pessoa {
     }
 
     public void setClassificacao(String classificacao) {
-        this.classificacao = Objects.requireNonNull(classificacao, "Classificação não pode ser nula.");
+        this.classificacao = classificacao;
     }
 
     public int getIdade() {
@@ -63,9 +49,6 @@ public class Cliente extends Pessoa {
     }
 
     public void setIdade(int idade) {
-        if (idade < 18) {
-            throw new IllegalArgumentException("Idade não pode ser menor que 18.");
-        }
         this.idade = idade;
     }
 
@@ -95,14 +78,29 @@ public class Cliente extends Pessoa {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         final Cliente other = (Cliente) obj;
-        return this.frequencia == other.frequencia &&
-               this.idade == other.idade &&
-               this.adimplente == other.adimplente &&
-               Objects.equals(this.classificacao, other.classificacao) &&
-               Objects.equals(this.veiculos, other.veiculos);
+        if (this.frequencia != other.frequencia) {
+            return false;
+        }
+        if (this.idade != other.idade) {
+            return false;
+        }
+        if (this.adimplente != other.adimplente) {
+            return false;
+        }
+        if (!Objects.equals(this.classificacao, other.classificacao)) {
+            return false;
+        }
+        return Objects.equals(this.veiculos, other.veiculos);
     }
-}
+    
+ }

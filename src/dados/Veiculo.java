@@ -2,6 +2,7 @@ package dados;
 
 import java.util.Objects;
 
+
 public class Veiculo {
     private String marca_modelo;
     private String ano;
@@ -9,10 +10,10 @@ public class Veiculo {
     private String tipo;
 
     public Veiculo(String marca_modelo, String ano, String placa, String tipo) {
-        setMarca_modelo(marca_modelo);
-        setAno(ano);
-        setPlaca(placa);
-        setTipo(tipo);
+        this.marca_modelo = marca_modelo;
+        this.ano = ano;
+        this.placa = placa;
+        this.tipo = tipo;
     }
 
     public String getMarca_modelo() {
@@ -20,9 +21,6 @@ public class Veiculo {
     }
 
     public void setMarca_modelo(String marca_modelo) {
-        if (marca_modelo == null || marca_modelo.trim().isEmpty()) {
-            throw new IllegalArgumentException("Marca/modelo não pode ser nulo ou vazio.");
-        }
         this.marca_modelo = marca_modelo;
     }
 
@@ -31,12 +29,6 @@ public class Veiculo {
     }
 
     public void setAno(String ano) {
-        if (ano == null || ano.trim().isEmpty()) {
-            throw new IllegalArgumentException("Ano não pode ser nulo ou vazio.");
-        }
-        if (!ano.matches("\\d{4}")) {
-            throw new IllegalArgumentException("Ano deve conter 4 dígitos numéricos.");
-        }
         this.ano = ano;
     }
 
@@ -45,9 +37,6 @@ public class Veiculo {
     }
 
     public void setPlaca(String placa) {
-        if (placa == null || placa.trim().isEmpty()) {
-            throw new IllegalArgumentException("Placa não pode ser nula ou vazia.");
-        }
         this.placa = placa;
     }
 
@@ -56,9 +45,6 @@ public class Veiculo {
     }
 
     public void setTipo(String tipo) {
-        if (tipo == null || tipo.trim().isEmpty()) {
-            throw new IllegalArgumentException("Tipo de veículo não pode ser nulo ou vazio.");
-        }
         this.tipo = tipo;
     }
 
@@ -79,13 +65,27 @@ public class Veiculo {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         final Veiculo other = (Veiculo) obj;
-        return Objects.equals(this.marca_modelo, other.marca_modelo) &&
-               Objects.equals(this.ano, other.ano) &&
-               Objects.equals(this.placa, other.placa) &&
-               Objects.equals(this.tipo, other.tipo);
+        if (!Objects.equals(this.marca_modelo, other.marca_modelo)) {
+            return false;
+        }
+        if (!Objects.equals(this.ano, other.ano)) {
+            return false;
+        }
+        if (!Objects.equals(this.placa, other.placa)) {
+            return false;
+        }
+        return Objects.equals(this.tipo, other.tipo);
     }
+    
+   
 }

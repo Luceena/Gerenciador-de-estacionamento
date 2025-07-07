@@ -2,6 +2,7 @@ package dados;
 
 import java.util.Objects;
 
+
 public class Funcionario extends Pessoa {
 
     private double salario;
@@ -9,30 +10,17 @@ public class Funcionario extends Pessoa {
     private String tempoAtendimento;
 
     public Funcionario(double salario, double avaliacao, String tempoAtendimento, String nome, String cpf) {
-        super(Objects.requireNonNull(nome, "Nome não pode ser nulo."),
-              Objects.requireNonNull(cpf, "CPF não pode ser nulo."));
-
-        if (salario < 0) {
-            throw new IllegalArgumentException("Salário não pode ser negativo.");
-        }
-
-        if (avaliacao < 0.0 || avaliacao > 10.0) {
-            throw new IllegalArgumentException("Avaliação deve estar entre 0.0 e 10.0.");
-        }
-
+        super(nome, cpf);
         this.salario = salario;
         this.avaliacao = avaliacao;
-        this.tempoAtendimento = Objects.requireNonNull(tempoAtendimento, "Tempo de atendimento não pode ser nulo.");
+        this.tempoAtendimento = tempoAtendimento;
     }
-
+    
     public double getSalario() {
         return salario;
     }
 
     public void setSalario(double salario) {
-        if (salario < 0) {
-            throw new IllegalArgumentException("Salário não pode ser negativo.");
-        }
         this.salario = salario;
     }
 
@@ -41,9 +29,6 @@ public class Funcionario extends Pessoa {
     }
 
     public void setAvaliacao(double avaliacao) {
-        if (avaliacao < 0.0 || avaliacao > 10.0){
-            throw new IllegalArgumentException("Avaliação deve estar entre 0.0 e 10.0.");
-        }
         this.avaliacao = avaliacao;
     }
 
@@ -52,7 +37,7 @@ public class Funcionario extends Pessoa {
     }
 
     public void setTempoAtendimento(String tempoAtendimento) {
-        this.tempoAtendimento = Objects.requireNonNull(tempoAtendimento, "Tempo de atendimento não pode ser nulo.");
+        this.tempoAtendimento = tempoAtendimento;
     }
 
     @Override
@@ -71,16 +56,27 @@ public class Funcionario extends Pessoa {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         final Funcionario other = (Funcionario) obj;
-        return Double.doubleToLongBits(this.salario) == Double.doubleToLongBits(other.salario)
-            && Double.doubleToLongBits(this.avaliacao) == Double.doubleToLongBits(other.avaliacao)
-            && Objects.equals(this.tempoAtendimento, other.tempoAtendimento);
+        if (Double.doubleToLongBits(this.salario) != Double.doubleToLongBits(other.salario)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.avaliacao) != Double.doubleToLongBits(other.avaliacao)) {
+            return false;
+        }
+        return Objects.equals(this.tempoAtendimento, other.tempoAtendimento);
     }
-
-    public void crudFuncionario() {
-        // lógica de CRUD será adicionada aqui
-    }
+    
+    
+    
+    public void crudFuncionario(){}
+    
 }

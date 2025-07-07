@@ -1,14 +1,16 @@
+
 package dados;
 
 import java.util.Objects;
+
 
 public class Pessoa {
     private String nome;
     private String cpf;
 
     public Pessoa(String nome, String cpf) {
-        setNome(nome); // usando os setters com validação
-        setCpf(cpf);
+        this.nome = nome;
+        this.cpf = cpf;
     }
 
     public String getNome() {
@@ -16,9 +18,6 @@ public class Pessoa {
     }
 
     public void setNome(String nome) {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("O nome não pode ser nulo ou vazio.");
-        }
         this.nome = nome;
     }
 
@@ -27,9 +26,6 @@ public class Pessoa {
     }
 
     public void setCpf(String cpf) {
-        if (cpf == null || cpf.trim().isEmpty()) {
-            throw new IllegalArgumentException("O CPF não pode ser nulo ou vazio.");
-        }
         this.cpf = cpf;
     }
 
@@ -48,11 +44,24 @@ public class Pessoa {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
         final Pessoa other = (Pessoa) obj;
-        return Objects.equals(this.nome, other.nome) &&
-               Objects.equals(this.cpf, other.cpf);
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return Objects.equals(this.cpf, other.cpf);
     }
+    
+    
+    
+    
+    
 }
