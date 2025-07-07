@@ -7,11 +7,24 @@ import java.util.ArrayList;
 public class RepositorioFuncionario {
     private static final String ARQUIVO = "funcionarios.csv";
     private ArrayList<Funcionario> funcionarios;
+    private static RepositorioFuncionario instance;
 
-    public RepositorioFuncionario() {
+    private RepositorioFuncionario() {
         this.funcionarios = new ArrayList<>();
         carregarDados();
     }
+
+    public static RepositorioFuncionario getInstance(){
+        if(instance == null){
+            synchronized(RepositorioFuncionario.class){
+                if(instance == null){
+                    instance = new RepositorioFuncionario();
+                }
+            }
+        }
+        return instance;
+    }
+
 
     public void adicionar(Funcionario funcionario) {
         funcionarios.add(funcionario);

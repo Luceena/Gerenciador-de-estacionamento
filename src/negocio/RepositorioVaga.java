@@ -7,10 +7,22 @@ import java.util.ArrayList;
 public class RepositorioVaga {
     private static final String ARQUIVO = "vagas.csv";
     private ArrayList<Vaga> vagas;
+    private static RepositorioVaga instance;
 
-    public RepositorioVaga() {
+    private RepositorioVaga() {
         this.vagas = new ArrayList<>();
         carregarDados();
+    }
+
+    public static RepositorioVaga getInstance(){
+        if(instance == null){
+            synchronized(RepositorioVaga.class){
+                if(instance == null){
+                    instance = new RepositorioVaga();
+                }
+            }
+        }
+        return instance;
     }
 
     public void adicionar(Vaga vaga) {

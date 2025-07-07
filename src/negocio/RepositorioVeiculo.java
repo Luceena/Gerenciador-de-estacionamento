@@ -7,10 +7,22 @@ import java.util.ArrayList;
 public class RepositorioVeiculo {
     private static final String ARQUIVO = "veiculos.csv";
     private ArrayList<Veiculo> veiculos;
+    private static RepositorioVeiculo instance;
 
-    public RepositorioVeiculo() {
+    private RepositorioVeiculo() {
         this.veiculos = new ArrayList<>();
         carregarDados();
+    }
+
+    public static RepositorioVeiculo getInstance(){
+        if(instance == null){
+            synchronized(RepositorioVeiculo.class){
+                if(instance == null){
+                    instance = new RepositorioVeiculo();
+                }
+            }
+        }
+        return instance;
     }
 
     public void adicionar(Veiculo veiculo) {

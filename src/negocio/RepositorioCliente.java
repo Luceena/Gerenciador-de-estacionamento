@@ -9,10 +9,22 @@ import java.util.List;
 public class RepositorioCliente {
     private static final String ARQUIVO = "clientes.csv";
     private ArrayList<Cliente> clientes;
+    private static RepositorioCliente instance;
 
-    public RepositorioCliente() {
+    private RepositorioCliente() {
         this.clientes = new ArrayList<>();
         carregarDados();
+    }
+
+    public static RepositorioCliente getInstance(){
+        if(instance == null){
+            synchronized(RepositorioCliente.class){
+                if(instance == null){
+                    instance = new RepositorioCliente();
+                }
+            }
+        }
+        return instance;
     }
 
     public void adicionar(Cliente cliente) {

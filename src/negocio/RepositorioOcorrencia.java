@@ -9,10 +9,22 @@ import java.util.ArrayList;
 public class RepositorioOcorrencia {
     private static final String ARQUIVO = "ocorrencias.csv";
     private ArrayList<Ocorrencia> ocorrencias;
+    private static RepositorioOcorrencia instance;
 
-    public RepositorioOcorrencia() {
+    private  RepositorioOcorrencia() {
         this.ocorrencias = new ArrayList<>();
         carregarDados();
+    }
+
+    public static RepositorioOcorrencia getInstance(){
+        if(instance == null){
+            synchronized(RepositorioOcorrencia.class){
+                if(instance == null){
+                    instance = new RepositorioOcorrencia();
+                }
+            }
+        }
+        return instance;
     }
 
     public void adicionar(Ocorrencia ocorrencia) {
