@@ -24,3 +24,10 @@ hs_err_pid*
 replay_pid*
 /nbproject/private/
 /build/
+
+# csv's
+clientes.csv
+funcionarios.csv
+ocorrencias.csv
+vagas.csv
+veiculos.csv

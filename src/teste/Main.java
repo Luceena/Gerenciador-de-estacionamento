@@ -21,7 +21,7 @@ public class Main {
         
         
         RepositorioVeiculo repoVeiculo = new RepositorioVeiculo();
-        Veiculo veiculo = new Veiculo("Toyota", "2020", "ABC1234", "SUV");
+        Veiculo veiculo = new Veiculo("Toyota", "2021", "ABC1234", "SUV");
         repoVeiculo.adicionar(veiculo); 
         
         
