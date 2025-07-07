@@ -34,7 +34,7 @@ public class Veiculo {
         if (ano == null || ano.trim().isEmpty()) {
             throw new IllegalArgumentException("Ano não pode ser nulo ou vazio.");
         }
-        if (!ano.matches("\\d{4}")) {
+        if (ano.length() > 4) {
             throw new IllegalArgumentException("Ano deve conter 4 dígitos numéricos.");
         }
         this.ano = ano;
