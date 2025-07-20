@@ -3,27 +3,27 @@ package dados;
 import java.util.Objects;
 
 public class Veiculo {
-    private String marca_modelo;
+    private String marcaModelo;
     private String ano;
     private String placa;
     private String tipo;
 
     public Veiculo(String marca_modelo, String ano, String placa, String tipo) {
-        setMarca_modelo(marca_modelo);
+        setMarcaModelo(marca_modelo);
         setAno(ano);
         setPlaca(placa);
         setTipo(tipo);
     }
 
-    public String getMarca_modelo() {
-        return marca_modelo;
+    public String getMarcaModelo() {
+        return marcaModelo;
     }
 
-    public void setMarca_modelo(String marca_modelo) {
-        if (marca_modelo == null || marca_modelo.trim().isEmpty()) {
+    public void setMarcaModelo(String marcaModelo) {
+        if (marcaModelo == null || marcaModelo.trim().isEmpty()) {
             throw new IllegalArgumentException("Marca/modelo não pode ser nulo ou vazio.");
         }
-        this.marca_modelo = marca_modelo;
+        this.marcaModelo = marcaModelo;
     }
 
     public String getAno() {
@@ -64,13 +64,13 @@ public class Veiculo {
 
     @Override
     public String toString() {
-        return "Veiculo{" + "marca_modelo=" + marca_modelo + ", ano=" + ano + ", placa=" + placa + ", tipo=" + tipo + '}';
+        return "Veiculo{" + "marcaModelo=" + marcaModelo + ", ano=" + ano + ", placa=" + placa + ", tipo=" + tipo + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.marca_modelo);
+        hash = 59 * hash + Objects.hashCode(this.marcaModelo);
         hash = 59 * hash + Objects.hashCode(this.ano);
         hash = 59 * hash + Objects.hashCode(this.placa);
         hash = 59 * hash + Objects.hashCode(this.tipo);
@@ -83,7 +83,7 @@ public class Veiculo {
         if (obj == null || getClass() != obj.getClass()) return false;
 
         final Veiculo other = (Veiculo) obj;
-        return Objects.equals(this.marca_modelo, other.marca_modelo) &&
+        return Objects.equals(this.marcaModelo, other.marcaModelo) &&
                Objects.equals(this.ano, other.ano) &&
                Objects.equals(this.placa, other.placa) &&
                Objects.equals(this.tipo, other.tipo);

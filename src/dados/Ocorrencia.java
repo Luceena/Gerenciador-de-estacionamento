@@ -5,14 +5,14 @@ import java.util.Objects;
 
 public class Ocorrencia {
     private String tipo;
-    private ArrayList<Veiculo> veiculos_envolvidos;
+    private ArrayList<Veiculo> veiculosEnvolvidos;
     private ArrayList<Cliente> envolvidos;
 
-    public Ocorrencia(String tipo, ArrayList<Veiculo> veiculos_envolvidos, ArrayList<Cliente> envolvidos) {
+    public Ocorrencia(String tipo, ArrayList<Veiculo> veiculosEnvolvidos, ArrayList<Cliente> envolvidos) {
         if (tipo == null || tipo.trim().isEmpty()) {
             throw new IllegalArgumentException("O tipo da ocorrência não pode ser nulo ou vazio.");
         }
-        if (veiculos_envolvidos == null) {
+        if (veiculosEnvolvidos == null) {
             throw new IllegalArgumentException("A lista de veículos envolvidos não pode ser nula.");
         }
         if (envolvidos == null) {
@@ -20,7 +20,7 @@ public class Ocorrencia {
         }
 
         this.tipo = tipo;
-        this.veiculos_envolvidos = veiculos_envolvidos;
+        this.veiculosEnvolvidos = veiculosEnvolvidos;
         this.envolvidos = envolvidos;
     }
 
@@ -35,15 +35,15 @@ public class Ocorrencia {
         this.tipo = tipo;
     }
 
-    public ArrayList<Veiculo> getVeiculos_envolvidos() {
-        return veiculos_envolvidos;
+    public ArrayList<Veiculo> getVeiculosEnvolvidos() {
+        return veiculosEnvolvidos;
     }
 
-    public void setVeiculos_envolvidos(ArrayList<Veiculo> veiculos_envolvidos) {
-        if (veiculos_envolvidos == null) {
+    public void setVeiculosEnvolvidos(ArrayList<Veiculo> veiculosEnvolvidos) {
+        if (veiculosEnvolvidos == null) {
             throw new IllegalArgumentException("A lista de veículos envolvidos não pode ser nula.");
         }
-        this.veiculos_envolvidos = veiculos_envolvidos;
+        this.veiculosEnvolvidos = veiculosEnvolvidos;
     }
 
     public ArrayList<Cliente> getEnvolvidos() {
@@ -61,7 +61,7 @@ public class Ocorrencia {
     public String toString() {
         return "Ocorrencia{" +
                 "tipo='" + tipo + '\'' +
-                ", veiculos_envolvidos=" + veiculos_envolvidos +
+                ", veiculosEnvolvidos=" + veiculosEnvolvidos +
                 ", envolvidos=" + envolvidos +
                 '}';
     }
@@ -70,7 +70,7 @@ public class Ocorrencia {
     public int hashCode() {
         int hash = 5;
         hash = 89 * hash + Objects.hashCode(this.tipo);
-        hash = 89 * hash + Objects.hashCode(this.veiculos_envolvidos);
+        hash = 89 * hash + Objects.hashCode(this.veiculosEnvolvidos);
         hash = 89 * hash + Objects.hashCode(this.envolvidos);
         return hash;
     }
@@ -82,7 +82,7 @@ public class Ocorrencia {
 
         final Ocorrencia other = (Ocorrencia) obj;
         return Objects.equals(this.tipo, other.tipo) &&
-               Objects.equals(this.veiculos_envolvidos, other.veiculos_envolvidos) &&
+               Objects.equals(this.veiculosEnvolvidos, other.veiculosEnvolvidos) &&
                Objects.equals(this.envolvidos, other.envolvidos);
     }
 
