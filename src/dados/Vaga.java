@@ -56,11 +56,11 @@ public class Vaga {
     @Override
     public String toString() {
         return "Vaga{" +
-               "numero=" + numero +
-               ", tipo=" + tipo +
-               ", preferencial=" + preferencial +
-               ", ocupada=" + ocupada +
-               '}';
+                "numero=" + numero +
+                ", tipo=" + tipo +
+                ", preferencial=" + preferencial +
+                ", ocupada=" + ocupada +
+                '}';
     }
 
     @Override
@@ -74,13 +74,15 @@ public class Vaga {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
 
         final Vaga other = (Vaga) obj;
         return this.numero == other.numero &&
-               this.preferencial == other.preferencial &&
-               this.ocupada == other.ocupada &&
-               Objects.equals(this.tipo, other.tipo);
+                this.preferencial == other.preferencial &&
+                this.ocupada == other.ocupada &&
+                Objects.equals(this.tipo, other.tipo);
     }
 }

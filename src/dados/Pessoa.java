@@ -48,11 +48,13 @@ public class Pessoa {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
 
         final Pessoa other = (Pessoa) obj;
         return Objects.equals(this.nome, other.nome) &&
-               Objects.equals(this.cpf, other.cpf);
+                Objects.equals(this.cpf, other.cpf);
     }
 }

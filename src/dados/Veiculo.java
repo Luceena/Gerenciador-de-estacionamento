@@ -79,13 +79,15 @@ public class Veiculo {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
 
         final Veiculo other = (Veiculo) obj;
         return Objects.equals(this.marcaModelo, other.marcaModelo) &&
-               Objects.equals(this.ano, other.ano) &&
-               Objects.equals(this.placa, other.placa) &&
-               Objects.equals(this.tipo, other.tipo);
+                Objects.equals(this.ano, other.ano) &&
+                Objects.equals(this.placa, other.placa) &&
+                Objects.equals(this.tipo, other.tipo);
     }
 }

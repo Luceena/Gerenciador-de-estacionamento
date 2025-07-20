@@ -16,10 +16,10 @@ public class RepositorioCliente {
         carregarDados();
     }
 
-    public static RepositorioCliente getInstance(){
-        if(instance == null){
-            synchronized(RepositorioCliente.class){
-                if(instance == null){
+    public static RepositorioCliente getInstance() {
+        if (instance == null) {
+            synchronized (RepositorioCliente.class) {
+                if (instance == null) {
                     instance = new RepositorioCliente();
                 }
             }
@@ -64,12 +64,12 @@ public class RepositorioCliente {
         try (PrintWriter writer = new PrintWriter(new FileWriter(ARQUIVO))) {
             writer.println("nome,cpf,idade,frequencia,classificacao,adimplente");
             for (Cliente cliente : clientes) {
-                writer.println(cliente.getNome() + "," + 
-                               cliente.getCpf() + "," + 
-                               cliente.getIdade() + "," + 
-                               cliente.getFrequencia() + "," + 
-                               cliente.getClassificacao() + "," + 
-                               cliente.isAdimplente());
+                writer.println(cliente.getNome() + "," +
+                        cliente.getCpf() + "," +
+                        cliente.getIdade() + "," +
+                        cliente.getFrequencia() + "," +
+                        cliente.getClassificacao() + "," +
+                        cliente.isAdimplente());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -78,14 +78,15 @@ public class RepositorioCliente {
 
     private void carregarDados() {
         File arquivo = new File(ARQUIVO);
-        if (!arquivo.exists()) return;
+        if (!arquivo.exists())
+            return;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO))) {
             String linha;
-            reader.readLine(); 
+            reader.readLine();
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(",");
-                ArrayList<Veiculo> veiculos = new ArrayList<>(); 
+                ArrayList<Veiculo> veiculos = new ArrayList<>();
                 Cliente cliente = new Cliente(veiculos, dados[0], dados[1], Integer.parseInt(dados[2]));
                 cliente.setFrequencia(Integer.parseInt(dados[3]));
                 cliente.setClassificacao(dados[4]);

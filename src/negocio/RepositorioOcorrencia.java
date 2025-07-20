@@ -11,15 +11,15 @@ public class RepositorioOcorrencia {
     private ArrayList<Ocorrencia> ocorrencias;
     private static RepositorioOcorrencia instance;
 
-    private  RepositorioOcorrencia() {
+    private RepositorioOcorrencia() {
         this.ocorrencias = new ArrayList<>();
         carregarDados();
     }
 
-    public static RepositorioOcorrencia getInstance(){
-        if(instance == null){
-            synchronized(RepositorioOcorrencia.class){
-                if(instance == null){
+    public static RepositorioOcorrencia getInstance() {
+        if (instance == null) {
+            synchronized (RepositorioOcorrencia.class) {
+                if (instance == null) {
                     instance = new RepositorioOcorrencia();
                 }
             }
@@ -65,18 +65,18 @@ public class RepositorioOcorrencia {
             writer.println("tipo,veiculos_envolvidos,envolvidos");
             for (Ocorrencia ocorrencia : ocorrencias) {
                 StringBuilder veiculosStr = new StringBuilder();
-                for (Veiculo veiculo : ocorrencia.getVeiculos_envolvidos()) {
+                for (Veiculo veiculo : ocorrencia.getVeiculosEnvolvidos()) {
                     veiculosStr.append(veiculo.getPlaca()).append(";");
                 }
-                
+
                 StringBuilder envolvidosStr = new StringBuilder();
                 for (Cliente cliente : ocorrencia.getEnvolvidos()) {
                     envolvidosStr.append(cliente.getCpf()).append(";");
                 }
-                
-                writer.println(ocorrencia.getTipo() + "," + 
-                              veiculosStr.toString() + "," + 
-                              envolvidosStr.toString());
+
+                writer.println(ocorrencia.getTipo() + "," +
+                        veiculosStr.toString() + "," +
+                        envolvidosStr.toString());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,14 +85,15 @@ public class RepositorioOcorrencia {
 
     private void carregarDados() {
         File arquivo = new File(ARQUIVO);
-        if (!arquivo.exists()) return;
+        if (!arquivo.exists())
+            return;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO))) {
             String linha;
-            reader.readLine(); 
+            reader.readLine();
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(",");
-              
+
             }
         } catch (IOException e) {
             e.printStackTrace();

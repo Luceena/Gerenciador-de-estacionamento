@@ -17,7 +17,7 @@ public class FuncionamentoFacade {
     private RepositorioVaga repositorioVaga;
     private RepositorioVeiculo repositorioVeiculo;
 
-    private FuncionamentoFacade(){
+    private FuncionamentoFacade() {
         controladorEstacionamento = ControladorEstacionamento.getInstance();
         repositorioCliente = RepositorioCliente.getInstance();
         repositorioFuncionario = RepositorioFuncionario.getInstance();
@@ -26,26 +26,26 @@ public class FuncionamentoFacade {
         repositorioVeiculo = RepositorioVeiculo.getInstance();
     }
 
-    public static FuncionamentoFacade getInstance(){
-        if(instance == null){
-            synchronized(FuncionamentoFacade.class){
-                if(instance == null){
-                instance = new FuncionamentoFacade();
-            }
+    public static FuncionamentoFacade getInstance() {
+        if (instance == null) {
+            synchronized (FuncionamentoFacade.class) {
+                if (instance == null) {
+                    instance = new FuncionamentoFacade();
+                }
             }
         }
         return instance;
     }
 
-    public void adicionarCliente(Cliente cliente){
+    public void adicionarCliente(Cliente cliente) {
         repositorioCliente.adicionar(cliente);
     }
 
-    public void adicionarFuncionario(Funcionario funcionario){
+    public void adicionarFuncionario(Funcionario funcionario) {
         repositorioFuncionario.adicionar(funcionario);
     }
-    
-    public void adicionarVeiculo(Veiculo veiculo){
+
+    public void adicionarVeiculo(Veiculo veiculo) {
         repositorioVeiculo.adicionar(veiculo);
     }
 }

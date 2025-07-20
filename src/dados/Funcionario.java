@@ -10,7 +10,7 @@ public class Funcionario extends Pessoa {
 
     public Funcionario(double salario, double avaliacao, String tempoAtendimento, String nome, String cpf) {
         super(Objects.requireNonNull(nome, "Nome não pode ser nulo."),
-              Objects.requireNonNull(cpf, "CPF não pode ser nulo."));
+                Objects.requireNonNull(cpf, "CPF não pode ser nulo."));
 
         if (salario < 0) {
             throw new IllegalArgumentException("Salário não pode ser negativo.");
@@ -57,27 +57,32 @@ public class Funcionario extends Pessoa {
 
     @Override
     public String toString() {
-        return "Funcionario{" + "salario=" + salario + ", avaliacao=" + avaliacao + ", tempoAtendimento=" + tempoAtendimento + '}';
+        return "Funcionario{" + "salario=" + salario + ", avaliacao=" + avaliacao + ", tempoAtendimento="
+                + tempoAtendimento + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + (int) (Double.doubleToLongBits(this.salario) ^ (Double.doubleToLongBits(this.salario) >>> 32));
-        hash = 41 * hash + (int) (Double.doubleToLongBits(this.avaliacao) ^ (Double.doubleToLongBits(this.avaliacao) >>> 32));
+        hash = 41 * hash
+                + (int) (Double.doubleToLongBits(this.salario) ^ (Double.doubleToLongBits(this.salario) >>> 32));
+        hash = 41 * hash
+                + (int) (Double.doubleToLongBits(this.avaliacao) ^ (Double.doubleToLongBits(this.avaliacao) >>> 32));
         hash = 41 * hash + Objects.hashCode(this.tempoAtendimento);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+
         final Funcionario other = (Funcionario) obj;
         return Double.doubleToLongBits(this.salario) == Double.doubleToLongBits(other.salario)
-            && Double.doubleToLongBits(this.avaliacao) == Double.doubleToLongBits(other.avaliacao)
-            && Objects.equals(this.tempoAtendimento, other.tempoAtendimento);
+                && Double.doubleToLongBits(this.avaliacao) == Double.doubleToLongBits(other.avaliacao)
+                && Objects.equals(this.tempoAtendimento, other.tempoAtendimento);
     }
 
     public void crudFuncionario() {

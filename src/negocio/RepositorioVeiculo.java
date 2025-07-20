@@ -14,10 +14,10 @@ public class RepositorioVeiculo {
         carregarDados();
     }
 
-    public static RepositorioVeiculo getInstance(){
-        if(instance == null){
-            synchronized(RepositorioVeiculo.class){
-                if(instance == null){
+    public static RepositorioVeiculo getInstance() {
+        if (instance == null) {
+            synchronized (RepositorioVeiculo.class) {
+                if (instance == null) {
                     instance = new RepositorioVeiculo();
                 }
             }
@@ -62,10 +62,10 @@ public class RepositorioVeiculo {
         try (PrintWriter writer = new PrintWriter(new FileWriter(ARQUIVO))) {
             writer.println("marca_modelo,ano,placa,tipo");
             for (Veiculo veiculo : veiculos) {
-                writer.println(veiculo.getMarca_modelo() + "," + 
-                             veiculo.getAno() + "," + 
-                             veiculo.getPlaca() + "," + 
-                             veiculo.getTipo());
+                writer.println(veiculo.getMarcaModelo() + "," +
+                        veiculo.getAno() + "," +
+                        veiculo.getPlaca() + "," +
+                        veiculo.getTipo());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,11 +74,12 @@ public class RepositorioVeiculo {
 
     private void carregarDados() {
         File arquivo = new File(ARQUIVO);
-        if (!arquivo.exists()) return;
+        if (!arquivo.exists())
+            return;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO))) {
             String linha;
-//            reader.readLine(); 
+            // reader.readLine();
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(",");
                 Veiculo veiculo = new Veiculo(dados[0], dados[1], dados[2], dados[3]);

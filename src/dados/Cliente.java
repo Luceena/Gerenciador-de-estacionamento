@@ -12,8 +12,8 @@ public class Cliente extends Pessoa {
 
     public Cliente(ArrayList<Veiculo> veiculos, String nome, String cpf, int idade) {
         super(Objects.requireNonNull(nome, "Nome não pode ser nulo"),
-              Objects.requireNonNull(cpf, "CPF não pode ser nulo"));
-        
+                Objects.requireNonNull(cpf, "CPF não pode ser nulo"));
+
         if (veiculos == null) {
             throw new IllegalArgumentException("A lista de veículos não pode ser nula.");
         }
@@ -79,7 +79,8 @@ public class Cliente extends Pessoa {
 
     @Override
     public String toString() {
-        return "Cliente{" + "veiculos=" + veiculos + ", frequencia=" + frequencia + ", classificacao=" + classificacao + ", idade=" + idade + ", adimplente=" + adimplente + '}';
+        return "Cliente{" + "veiculos=" + veiculos + ", frequencia=" + frequencia + ", classificacao=" + classificacao
+                + ", idade=" + idade + ", adimplente=" + adimplente + '}';
     }
 
     @Override
@@ -95,14 +96,16 @@ public class Cliente extends Pessoa {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+
         final Cliente other = (Cliente) obj;
         return this.frequencia == other.frequencia &&
-               this.idade == other.idade &&
-               this.adimplente == other.adimplente &&
-               Objects.equals(this.classificacao, other.classificacao) &&
-               Objects.equals(this.veiculos, other.veiculos);
+                this.idade == other.idade &&
+                this.adimplente == other.adimplente &&
+                Objects.equals(this.classificacao, other.classificacao) &&
+                Objects.equals(this.veiculos, other.veiculos);
     }
 }

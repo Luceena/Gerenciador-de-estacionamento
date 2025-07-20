@@ -14,17 +14,16 @@ public class RepositorioFuncionario {
         carregarDados();
     }
 
-    public static RepositorioFuncionario getInstance(){
-        if(instance == null){
-            synchronized(RepositorioFuncionario.class){
-                if(instance == null){
+    public static RepositorioFuncionario getInstance() {
+        if (instance == null) {
+            synchronized (RepositorioFuncionario.class) {
+                if (instance == null) {
                     instance = new RepositorioFuncionario();
                 }
             }
         }
         return instance;
     }
-
 
     public void adicionar(Funcionario funcionario) {
         funcionarios.add(funcionario);
@@ -63,11 +62,11 @@ public class RepositorioFuncionario {
         try (PrintWriter writer = new PrintWriter(new FileWriter(ARQUIVO))) {
             writer.println("nome,cpf,salario,avaliacao,tempoAtendimento");
             for (Funcionario funcionario : funcionarios) {
-                writer.println(funcionario.getNome() + "," + 
-                              funcionario.getCpf() + "," + 
-                              funcionario.getSalario() + "," + 
-                              funcionario.getAvaliacao() + "," + 
-                              funcionario.getTempoAtendimento());
+                writer.println(funcionario.getNome() + "," +
+                        funcionario.getCpf() + "," +
+                        funcionario.getSalario() + "," +
+                        funcionario.getAvaliacao() + "," +
+                        funcionario.getTempoAtendimento());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,18 +75,19 @@ public class RepositorioFuncionario {
 
     private void carregarDados() {
         File arquivo = new File(ARQUIVO);
-        if (!arquivo.exists()) return;
+        if (!arquivo.exists())
+            return;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO))) {
             String linha;
-            reader.readLine(); 
+            reader.readLine();
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(",");
-                Funcionario funcionario = new Funcionario(Double.parseDouble(dados[2]), 
-                                                        Double.parseDouble(dados[3]), 
-                                                        dados[4], 
-                                                        dados[0], 
-                                                        dados[1]);
+                Funcionario funcionario = new Funcionario(Double.parseDouble(dados[2]),
+                        Double.parseDouble(dados[3]),
+                        dados[4],
+                        dados[0],
+                        dados[1]);
                 funcionarios.add(funcionario);
             }
         } catch (IOException e) {

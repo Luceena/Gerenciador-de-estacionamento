@@ -14,10 +14,10 @@ public class RepositorioVaga {
         carregarDados();
     }
 
-    public static RepositorioVaga getInstance(){
-        if(instance == null){
-            synchronized(RepositorioVaga.class){
-                if(instance == null){
+    public static RepositorioVaga getInstance() {
+        if (instance == null) {
+            synchronized (RepositorioVaga.class) {
+                if (instance == null) {
                     instance = new RepositorioVaga();
                 }
             }
@@ -62,10 +62,10 @@ public class RepositorioVaga {
         try (PrintWriter writer = new PrintWriter(new FileWriter(ARQUIVO))) {
             writer.println("numero,tipo,preferencial,ocupada");
             for (Vaga vaga : vagas) {
-                writer.println(vaga.getNumero() + "," + 
-                              vaga.getTipo() + "," + 
-                              vaga.isPreferencial() + "," + 
-                              vaga.isOcupada());
+                writer.println(vaga.getNumero() + "," +
+                        vaga.getTipo() + "," +
+                        vaga.isPreferencial() + "," +
+                        vaga.isOcupada());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,16 +74,17 @@ public class RepositorioVaga {
 
     private void carregarDados() {
         File arquivo = new File(ARQUIVO);
-        if (!arquivo.exists()) return;
+        if (!arquivo.exists())
+            return;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO))) {
             String linha;
             reader.readLine();
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(",");
-                Vaga vaga = new Vaga(Integer.parseInt(dados[0]), dados[1], 
-                                    Boolean.parseBoolean(dados[2]), 
-                                    Boolean.parseBoolean(dados[3]));
+                Vaga vaga = new Vaga(Integer.parseInt(dados[0]), dados[1],
+                        Boolean.parseBoolean(dados[2]),
+                        Boolean.parseBoolean(dados[3]));
                 vagas.add(vaga);
             }
         } catch (IOException e) {

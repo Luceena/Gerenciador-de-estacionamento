@@ -77,13 +77,15 @@ public class Ocorrencia {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
 
         final Ocorrencia other = (Ocorrencia) obj;
         return Objects.equals(this.tipo, other.tipo) &&
-               Objects.equals(this.veiculosEnvolvidos, other.veiculosEnvolvidos) &&
-               Objects.equals(this.envolvidos, other.envolvidos);
+                Objects.equals(this.veiculosEnvolvidos, other.veiculosEnvolvidos) &&
+                Objects.equals(this.envolvidos, other.envolvidos);
     }
 
     public String gerarRelatorio() {
