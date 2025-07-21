@@ -19,7 +19,7 @@ Tem como principal objetivo organizar e gerenciar um estacionamento, coletando d
 
 ## Diagrama de Classes
 
-UnknownDiagramError: No diagram type detected matching given configuration for text: ```mermaid
+```mermaid
 classDiagram
     direction TB
     class Pessoa {
@@ -238,6 +238,9 @@ classDiagram
 
 ## 👥 Equipe de Desenvolvimento
 [Carlos Eduardo](https://github.com/CarlosDPaula01)
+
 [Ewerton José](https://github.com/Ewerton-Jose)
+
 [Júlio Lucena](https://github.com/Luceena)
+
 [Otoniel Júnior](https://github.com/otonielnn)
