@@ -19,123 +19,225 @@ Tem como principal objetivo organizar e gerenciar um estacionamento, coletando d
 
 ## Diagrama de Classes
 
-```mermaid
-  classDiagram
-  direction LR
+UnknownDiagramError: No diagram type detected matching given configuration for text: ```mermaid
+classDiagram
+    direction TB
+    class Pessoa {
+        - nome: String
+        - cpf: String
+        + Pessoa(nome, cpf)
+        + getNome() String
+        + setNome(nome) void
+        + getCpf() String
+        + setCpf(cpf) void
+        + toString() String
+        + equals(obj) boolean
+        + hashCode() int
+    }
 
-  class Pessoa {
-    - nome: String
-    - cpf: String
-    + Pessoa(nome: String, cpf: String): void
-    + getNome() String
-    + setNome(nome: String)
-    + getCpf() String
-    + setCpf(cpf: String)
-    + toString() String
-    + equals(obj: Object) boolean
-    + hashCode() int
-  }
+    class Funcionario {
+        - salario: double
+        - avaliacao: double
+        - tempoAtendimento: String
+        + Funcionario(salario, avaliacao, tempoAtendimento, nome, cpf)
+        + getSalario() double
+        + setSalario(salario) void
+        + getAvaliacao() double
+        + setAvaliacao(avaliacao) void
+        + getTempoAtendimento() String
+        + setTempoAtendimento(tempoAtendimento) void
+        + toString() String
+        + equals(obj) boolean
+        + hashCode() int
+    }
 
-  class Funcionario {
-    - salario: double
-    - avaliacao: double
-    - tempoAtendimento: String
-    + Funcionario(salario: double, avaliacao: double, tempoAtendimento: String, nome: String, cpf: String): void
-    + getSalario() double
-    + setSalario(salario: double)
-    + getAvaliacao() double
-    + setAvaliacao(avaliacao: double)
-    + getTempoAtendimento() String
-    + setTempoAtendimento(tempoAtendimento: String)
-    + toString() String
-    + equals(obj: Object) boolean
-    + hashCode() int
-  }
+    class Cliente {
+        - veiculos: ArrayList~Veiculo~
+        - frequencia: int
+        - classificacao: String
+        - idade: int
+        - adimplente: boolean
+        + Cliente(veiculos, nome, cpf, idade)
+        + getVeiculos() ArrayList~Veiculo~
+        + setVeiculos(veiculos) void
+        + getFrequencia() int
+        + setFrequencia(frequencia) void
+        + getClassificacao() String
+        + setClassificacao(classificacao) void
+        + getIdade() int
+        + setIdade(idade) void
+        + isAdimplente() boolean
+        + setAdimplente(adimplente) void
+        + toString() String
+        + equals(obj) boolean
+        + hashCode() int
+    }
 
-  class Cliente {
-    - veiculos: ArrayList~Veiculo~
-    - frequencia: int
-    - classificacao: String
-    - idade: int
-    - adimplente: boolean
-    + Cliente(veiculos: Arraylist~Veiculo~, frequencia: int, classificacao: String, nome: String, cpf: String) void
-    + getVeiculos(): ArrayList~Veiculo~
-    + setVeiculos(veiculos: ArrayList~Veiculo~) void
-    + getFrequencia() int
-    + setFrequencia(frequencia: int) void
-    + getClassificacao() String
-    + setClassificacao(classificacao: String) void
-    + getIdade() int
-    + setIdade(idade: int) void
-    + isAdimplente() boolean
-    + setAdimplente(boolean adimplente) void
-    + toString() String
-    + equals(Object) boolean
-    + hashCode() int
-  }
+    class Veiculo {
+        - marcaModelo: String
+        - ano: String
+        - placa: String
+        - tipo: String
+        + Veiculo(marcaModelo, ano, placa, tipo)
+        + getMarcaModelo() String
+        + setMarcaModelo(marcaModelo) void
+        + getAno() String
+        + setAno(ano) void
+        + getPlaca() String
+        + setPlaca(placa) void
+        + getTipo() String
+        + setTipo(tipo) void
+        + toString() String
+        + equals(obj) boolean
+        + hashCode() int
+    }
+    class RepositorioFuncionario {
+        - ARQUIVO: String
+        - funcionarios: ArrayList~Funcionario~
+        - instance: RepositorioFuncionario
+        - RepositorioFuncionario()
+        + getInstance() RepositorioFuncionario
+        + adicionar(funcionario) void
+        + buscarPorCpf(cpf) Funcionario
+        + atualizar(funcionario) void
+        + remover(cpf) void
+        + listarTodos() ArrayList~Funcionario~
+        - salvarDados() void
+        - carregarDados() void
+    }
 
-  class Veiculo {
-    - marcaModelo: String
-    - ano: String
-    - placa: String
-    - tipo: String
-    + Veiculo(marcaModelo: String, ano: String, placa, String, tipo: String) void
-    + getMarcaModelo() String
-    + setMarcaModelo(marcaModelo: String) void
-    + getAno() String
-    + setAno(ano: String) void
-    + getPlaca() String
-    + setPlaca(placa: String) void
-    + getTipo() String
-    + setTipo(tipo: String) void
-    + toString() String
-    + equals(Object) boolean
-    + hashCode() int
-  }
+    class RepositorioCliente {
+        - ARQUIVO: String
+        - clientes: ArrayList~Cliente~
+        - instance: RepositorioCliente
+        - RepositorioCliente()
+        + getInstance() RepositorioCliente
+        + adicionar(cliente) void
+        + buscarPorCpf(cpf) Cliente
+        + atualizar(cliente) void
+        + remover(cpf) void
+        + listarTodos() ArrayList~Cliente~
+        - salvarDados() void
+        - carregarDados() void
+    }
 
-  class Vaga {
-    - numero: int
-    - tipo: String
-    - preferencial: boolean
-    - ocupada: boolean
-    - veiculo: Veiculo
-    + Vaga(numero: int, tipo: String, preferencial: boolean, ocuapada: boolean) void
-    + getnumero() int
-    + setNumero(numero: int) void
-    + getTipo() String
-    + setTipo(tipo: String) void
-    + isPreferencial() boolean
-    + setPreferencial(preferencial: boolean) void
-    + isOcupada() boolean
-    + setOcupada(ocupada: boolean) void
-    + getVeiculo() Veiculo
-    + setVeiculo(veiculo: Veiculo) void
-    + toString() String
-    + equals(Object) boolean
-    + hashCode() int
-  }
+    class RepositorioVeiculo {
+        - ARQUIVO: String
+        - veiculos: ArrayList~Veiculo~
+        - instance: RepositorioVeiculo
+        - RepositorioVeiculo()
+        + getInstance() RepositorioVeiculo
+        + adicionar(veiculo) void
+        + buscarPorPlaca(placa) Veiculo
+        + atualizar(veiculo) void
+        + remover(placa) void
+        + listarTodos() ArrayList~Veiculo~
+        - salvarDados() void
+        - carregarDados() void
+    }
+    class JanelaPrincipal {
+        + JanelaPrincipal()
+        - inicializarComponentes() void
+        - criarPainelCabecalho() JPanel
+        - criarPainelBotoes() JPanel
+        - criarBotao(texto, icone, descricao) JButton
+        - configurarIcone() void
+        - criarIconePersonalizado() void
+        - criarLogoImagem() JLabel
+    }
 
-  class Ocorrencia {
-    - tipo: String
-    - veiculosEnvolvidos: ArrayList~Veiculo~
-    - envolvidos: List~Cliente~ 
-    + Ocorrencia(tipo: String, veiculosEnvolvidos: ArrayList~Veiculo~, envolvidos: ArrayList~Cliente~) void
-    + getipo() String
-    + settipo(tipo: String) void
-    + getVeiculosEnvolvidos() ArrayList~Veiculo~
-    + setVeiculosEnvolvidos(veiculosEnvolvidos~ ArrayList~Veiculo~) void
-    + getEnvolvidos() ArrayList~Cliente~
-    + setEnvolvidos(envolvidos: ArrayList~Cliente~) void
-    + toString() String
-    + equals(Object) boolean
-    + hashCode() int
-  }
+    class JanelaCrudCliente {
+        - repositorio: RepositorioCliente
+        - modeloTabela: DefaultTableModel
+        - tabela: JTable
+        - txtNome: JTextField
+        - txtCpf: JTextField
+        - txtIdade: JTextField
+        - chkAdimplente: JCheckBox
+        - cmbClassificacao: JComboBox~String~
+        - spnFrequencia: JSpinner
+        + JanelaCrudCliente()
+        - inicializarComponentes() void
+        - criarPainelFormulario() JPanel
+        - criarPainelTabela() JPanel
+        - criarPainelBotoes() JPanel
+        - adicionarCliente() void
+        - atualizarCliente() void
+        - removerCliente() void
+        - carregarClienteSelecionado() void
+        - validarCampos() boolean
+        - limparCampos() void
+        - carregarDados() void
+    }
 
-  Pessoa <|-- Cliente
-  Pessoa <|-- Funcionario
-  
-  Cliente "1" --> "N" Veiculo : possui
-  Veiculo "0..1" --> "0..1" Vaga : ocupa
-  Ocorrencia "N" --> "N" Cliente 
-  Ocorrencia "N" --> "N" Veiculo
+    class JanelaCrudFuncionario {
+        - repositorio: RepositorioFuncionario
+        - modeloTabela: DefaultTableModel
+        - tabela: JTable
+        - txtNome: JTextField
+        - txtCpf: JTextField
+        - txtSalario: JTextField
+        - txtTempoAtendimento: JTextField
+        - spnAvaliacao: JSpinner
+        + JanelaCrudFuncionario()
+        - inicializarComponentes() void
+        - criarPainelFormulario() JPanel
+        - criarPainelTabela() JPanel
+        - criarPainelBotoes() JPanel
+        - adicionarFuncionario() void
+        - atualizarFuncionario() void
+        - removerFuncionario() void
+        - carregarFuncionarioSelecionado() void
+        - validarCampos() boolean
+        - limparCampos() void
+        - carregarDados() void
+    }
+
+    class JanelaCrudVeiculo {
+        - repositorio: RepositorioVeiculo
+        - modeloTabela: DefaultTableModel
+        - tabela: JTable
+        - txtMarcaModelo: JTextField
+        - txtAno: JTextField
+        - txtPlaca: JTextField
+        - cmbTipo: JComboBox~String~
+        + JanelaCrudVeiculo()
+        - inicializarComponentes() void
+        - criarPainelFormulario() JPanel
+        - criarPainelTabela() JPanel
+        - criarPainelBotoes() JPanel
+        - adicionarVeiculo() void
+        - atualizarVeiculo() void
+        - removerVeiculo() void
+        - carregarVeiculoSelecionado() void
+        - validarCampos() boolean
+        - limparCampos() void
+        - carregarDados() void
+    }
+
+    class Main {
+        + main(args) void
+    }
+    Pessoa <|-- Cliente
+    Pessoa <|-- Funcionario
+    Cliente "1" *-- "0..*" Veiculo : possui
+    RepositorioCliente --> Cliente : gerencia
+    RepositorioFuncionario --> Funcionario : gerencia
+    RepositorioVeiculo --> Veiculo : gerencia
+    
+    JanelaCrudCliente --> RepositorioCliente : usa
+    JanelaCrudFuncionario --> RepositorioFuncionario : usa
+    JanelaCrudVeiculo --> RepositorioVeiculo : usa
+    
+    JanelaPrincipal --> JanelaCrudCliente : cria
+    JanelaPrincipal --> JanelaCrudFuncionario : cria
+    JanelaPrincipal --> JanelaCrudVeiculo : cria
+    
+    Main --> JanelaPrincipal : inicia
 ```
+
+## 👥 Equipe de Desenvolvimento
+[Carlos Eduardo](https://github.com/CarlosDPaula01)
+[Ewerton José](https://github.com/Ewerton-Jose)
+[Júlio Lucena](https://github.com/Luceena)
+[Otoniel Júnior](https://github.com/otonielnn)
