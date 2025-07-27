@@ -17,8 +17,8 @@ public class Cliente extends Pessoa {
         if (veiculos == null) {
             throw new IllegalArgumentException("A lista de veículos não pode ser nula.");
         }
-        if (idade < 0) {
-            throw new IllegalArgumentException("Idade não pode ser negativa.");
+        if (idade < 18) {
+            throw new IllegalArgumentException("Idade não pode ser menor que 18.");
         }
 
         this.veiculos = veiculos;
@@ -63,8 +63,8 @@ public class Cliente extends Pessoa {
     }
 
     public void setIdade(int idade) {
-        if (idade < 0) {
-            throw new IllegalArgumentException("Idade não pode ser negativa.");
+        if (idade < 18) {
+            throw new IllegalArgumentException("Idade não pode ser menor que 18.");
         }
         this.idade = idade;
     }
