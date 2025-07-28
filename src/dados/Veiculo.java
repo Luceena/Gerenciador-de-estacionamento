@@ -2,7 +2,7 @@ package dados;
 
 import java.util.Objects;
 
-public class Veiculo {
+public class Veiculo implements DadosInterface {
     private String marcaModelo;
     private String ano;
     private String placa;
@@ -42,6 +42,28 @@ public class Veiculo {
 
     public String getPlaca() {
         return placa;
+    }
+
+    public String getIdentificador(){
+        return placa;
+    }
+
+    public String getCaracteristicas(){
+        String informacao = marcaModelo + "," + ano + "," + placa + "," + tipo;
+        return informacao;
+    }
+
+    public String getCaracteristicasSemFormatacao(){
+        String informacao = marcaModelo + ano + placa + tipo;
+        return informacao;
+    }
+
+    public DadosCliente getCaracteristicasReco(DadosInterface dado){
+        return new DadosCliente();
+    }
+
+    public String nome(){
+        return "testando";
     }
 
     public void setPlaca(String placa) {

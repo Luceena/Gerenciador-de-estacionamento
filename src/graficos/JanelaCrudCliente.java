@@ -1,6 +1,7 @@
 package graficos;
 
 import dados.Cliente;
+import dados.DadosInterface;
 import dados.Veiculo;
 import negocio.RepositorioCliente;
 import javax.swing.*;
@@ -259,16 +260,18 @@ public class JanelaCrudCliente extends JFrame {
 
     private void carregarDados() {
         modeloTabela.setRowCount(0);
-        for (Cliente cliente : repositorio.listarTodos()) {
-            Object[] linha = {
-                    cliente.getNome(),
-                    cliente.getCpf(),
-                    cliente.getIdade(),
-                    cliente.getFrequencia(),
-                    cliente.getClassificacao(),
-                    cliente.isAdimplente()
-            };
-            modeloTabela.addRow(linha);
+        for (DadosInterface dado : repositorio.listarTodos()) {
+            if(dado instanceof Cliente cliente){
+                Object[] linha = {
+                        cliente.getNome(),
+                        cliente.getCpf(),
+                        cliente.getIdade(),
+                        cliente.getFrequencia(),
+                        cliente.getClassificacao(),
+                        cliente.isAdimplente()
+                };
+                modeloTabela.addRow(linha);
+            }    
         }
     }
 }

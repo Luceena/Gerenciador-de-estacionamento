@@ -26,6 +26,10 @@ public class Pessoa {
         return cpf;
     }
 
+    public String getIdentificador(){
+        return cpf;
+    }
+
     public void setCpf(String cpf) {
         if (cpf == null || cpf.trim().isEmpty()) {
             throw new IllegalArgumentException("O CPF não pode ser nulo ou vazio.");

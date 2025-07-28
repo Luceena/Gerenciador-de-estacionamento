@@ -3,7 +3,7 @@ package dados;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Cliente extends Pessoa {
+public class Cliente extends Pessoa implements DadosInterface{
     private ArrayList<Veiculo> veiculos;
     private int frequencia;
     private String classificacao;
@@ -54,12 +54,28 @@ public class Cliente extends Pessoa {
         return classificacao;
     }
 
+    public DadosCliente getCaracteristicasReco(DadosInterface cliente){
+        return new DadosCliente(cliente.nome(), cliente.getIdentificador(), idade, classificacao, frequencia, adimplente);
+    }
+
+    public String nome(){
+        return getNome();
+    }
+
     public void setClassificacao(String classificacao) {
         this.classificacao = Objects.requireNonNull(classificacao, "Classificação não pode ser nula.");
     }
 
     public int getIdade() {
         return idade;
+    }
+
+    public String getCaracteristicas(){
+        return "teste, irei remover";
+    }
+
+    public String getCaracteristicasSemFormatacao(){
+        return "teste, irei remover";
     }
 
     public void setIdade(int idade) {

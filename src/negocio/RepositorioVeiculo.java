@@ -1,12 +1,13 @@
 package negocio;
 
+import dados.DadosInterface;
 import dados.Veiculo;
 import java.io.*;
 import java.util.ArrayList;
 
-public class RepositorioVeiculo {
+public class RepositorioVeiculo implements InterfaceRepositorios{
     private static final String ARQUIVO = "veiculos.csv";
-    private ArrayList<Veiculo> veiculos;
+    private ArrayList<DadosInterface> veiculos;
     private static RepositorioVeiculo instance;
 
     private RepositorioVeiculo() {
@@ -25,23 +26,23 @@ public class RepositorioVeiculo {
         return instance;
     }
 
-    public void adicionar(Veiculo veiculo) {
+    public void adicionar(DadosInterface veiculo) {
         veiculos.add(veiculo);
         salvarDados();
     }
 
-    public Veiculo buscarPorPlaca(String placa) {
-        for (Veiculo veiculo : veiculos) {
-            if (veiculo.getPlaca().equals(placa)) {
+    public DadosInterface buscar(String placa) {
+        for (DadosInterface veiculo : veiculos) {
+            if (veiculo.getIdentificador().equals(placa)) {
                 return veiculo;
             }
         }
         return null;
     }
 
-    public void atualizar(Veiculo veiculoAtualizado) {
+    public void atualizar(DadosInterface veiculoAtualizado) {
         for (int i = 0; i < veiculos.size(); i++) {
-            if (veiculos.get(i).getPlaca().equals(veiculoAtualizado.getPlaca())) {
+            if (veiculos.get(i).getIdentificador().equals(veiculoAtualizado.getIdentificador())) {
                 veiculos.set(i, veiculoAtualizado);
                 salvarDados();
                 break;
@@ -50,22 +51,19 @@ public class RepositorioVeiculo {
     }
 
     public void remover(String placa) {
-        veiculos.removeIf(veiculo -> veiculo.getPlaca().equals(placa));
+        veiculos.removeIf(veiculo -> veiculo.getIdentificador().equals(placa));
         salvarDados();
     }
 
-    public ArrayList<Veiculo> listarTodos() {
+    public ArrayList<DadosInterface> listarTodos() {
         return new ArrayList<>(veiculos);
     }
 
     private void salvarDados() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(ARQUIVO))) {
             writer.println("marca_modelo,ano,placa,tipo");
-            for (Veiculo veiculo : veiculos) {
-                writer.println(veiculo.getMarcaModelo() + "," +
-                        veiculo.getAno() + "," +
-                        veiculo.getPlaca() + "," +
-                        veiculo.getTipo());
+            for (DadosInterface veiculo : veiculos) {
+                writer.println(veiculo.getCaracteristicas());
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import dados.Cliente;
 import dados.Funcionario;
 import dados.Veiculo;
+import dados.DadosInterface;
 
 public class FuncionamentoFacade {
 
@@ -37,15 +38,15 @@ public class FuncionamentoFacade {
         return instance;
     }
 
-    public void adicionarCliente(Cliente cliente) {
-        repositorioCliente.adicionar(cliente);
-    }
-
     public void adicionarFuncionario(Funcionario funcionario) {
         repositorioFuncionario.adicionar(funcionario);
     }
 
     public void adicionarVeiculo(Veiculo veiculo) {
         repositorioVeiculo.adicionar(veiculo);
+    }
+
+    public void adicionar(InterfaceRepositorios repositorio, DadosInterface dado){
+        repositorio.adicionar(dado);
     }
 }

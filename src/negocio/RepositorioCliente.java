@@ -1,14 +1,16 @@
 package negocio;
 
 import dados.Cliente;
+import dados.DadosCliente;
+import dados.DadosInterface;
 import dados.Veiculo;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepositorioCliente {
+public class RepositorioCliente implements InterfaceRepositorios {
     private static final String ARQUIVO = "clientes.csv";
-    private ArrayList<Cliente> clientes;
+    private ArrayList<DadosInterface> clientes;
     private static RepositorioCliente instance;
 
     private RepositorioCliente() {
@@ -27,23 +29,23 @@ public class RepositorioCliente {
         return instance;
     }
 
-    public void adicionar(Cliente cliente) {
+    public void adicionar(DadosInterface cliente) {
         clientes.add(cliente);
         salvarDados();
     }
 
-    public Cliente buscarPorCpf(String cpf) {
-        for (Cliente cliente : clientes) {
-            if (cliente.getCpf().equals(cpf)) {
+    public DadosInterface buscar(String cpf) {
+        for (DadosInterface cliente : clientes) {
+            if (cliente.getIdentificador().equals(cpf)) {
                 return cliente;
             }
         }
         return null;
     }
 
-    public void atualizar(Cliente clienteAtualizado) {
+    public void atualizar(DadosInterface clienteAtualizado) {
         for (int i = 0; i < clientes.size(); i++) {
-            if (clientes.get(i).getCpf().equals(clienteAtualizado.getCpf())) {
+            if (clientes.get(i).getIdentificador().equals(clienteAtualizado.getIdentificador())) {
                 clientes.set(i, clienteAtualizado);
                 salvarDados();
                 break;
@@ -52,24 +54,44 @@ public class RepositorioCliente {
     }
 
     public void remover(String cpf) {
-        clientes.removeIf(cliente -> cliente.getCpf().equals(cpf));
+        clientes.removeIf(cliente -> cliente.getIdentificador().equals(cpf));
         salvarDados();
     }
 
-    public ArrayList<Cliente> listarTodos() {
+    public ArrayList<DadosInterface> listarTodos() {
         return new ArrayList<>(clientes);
+    }
+
+    public Cliente buscarPorCpf(String cpf) {
+        for (DadosInterface cliente : clientes) {
+            if(cliente instanceof Cliente){
+                if (cliente.getIdentificador().equals(cpf)) {
+                    return (Cliente)cliente;
+                }
+            }    
+        }
+        return null;
+    }
+
+    private void salvarDads() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(ARQUIVO))) {
+            writer.println("nome,cpf,idade,frequencia,classificacao,adimplente");
+            for (DadosInterface cliente : clientes) {
+                writer.println(cliente.getCaracteristicasReco(cliente));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void salvarDados() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(ARQUIVO))) {
             writer.println("nome,cpf,idade,frequencia,classificacao,adimplente");
-            for (Cliente cliente : clientes) {
-                writer.println(cliente.getNome() + "," +
-                        cliente.getCpf() + "," +
-                        cliente.getIdade() + "," +
-                        cliente.getFrequencia() + "," +
-                        cliente.getClassificacao() + "," +
-                        cliente.isAdimplente());
+            for (DadosInterface cliente : clientes) {
+                DadosCliente informacao = cliente.getCaracteristicasReco(cliente);
+                writer.println(informacao.nome() + ","
+                + informacao.cpf() + "," + informacao.idade() + "," + informacao.frequencia()
+                + "," + informacao.classificacao() + "," + informacao.adimplente());
             }
         } catch (IOException e) {
             e.printStackTrace();

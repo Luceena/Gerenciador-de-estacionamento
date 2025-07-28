@@ -1,5 +1,6 @@
 package graficos;
 
+import dados.DadosInterface;
 import dados.Veiculo;
 import negocio.RepositorioVeiculo;
 
@@ -223,12 +224,9 @@ public class JanelaCrudVeiculo extends JFrame {
 
     private void carregarDados() {
         modeloTabela.setRowCount(0);
-        for (Veiculo veiculo : repositorio.listarTodos()) {
+        for (DadosInterface veiculo : repositorio.listarTodos()) {
             Object[] linha = {
-                    veiculo.getMarcaModelo(),
-                    veiculo.getAno(),
-                    veiculo.getPlaca(),
-                    veiculo.getTipo()
+                    veiculo.getCaracteristicasSemFormatacao()
             };
             modeloTabela.addRow(linha);
         }
