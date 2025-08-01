@@ -3,8 +3,20 @@ package graficos;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JanelaPrincipal extends JFrame {
+
+    // Mapa declarativo com URLs do Icons8
+    private static final Map<String, String> URLS_ICONES = new HashMap<String, String>() {{
+        put("clientes", "https://img.icons8.com/fluency/48/person-male.png");
+        put("funcionarios", "https://img.icons8.com/fluency/48/manager.png");
+        put("veiculos", "https://img.icons8.com/fluency/48/car.png");
+        put("sair", "https://img.icons8.com/fluency/48/exit.png");
+    }};
+
+    private static final String LOGO_URL = "https://img.icons8.com/fluency/64/parking.png";
 
     public JanelaPrincipal() {
         inicializarComponentes();
@@ -31,7 +43,9 @@ public class JanelaPrincipal extends JFrame {
         painelLogo.setBackground(new Color(52, 73, 94));
 
         JLabel logoLabel = criarLogoImagem();
-        logoLabel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 10));
+        if (logoLabel != null) {
+            logoLabel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 10));
+        }
 
         JPanel painelTextos = new JPanel();
         painelTextos.setLayout(new BoxLayout(painelTextos, BoxLayout.Y_AXIS));
@@ -49,7 +63,9 @@ public class JanelaPrincipal extends JFrame {
         painelTextos.add(titulo);
         painelTextos.add(subtitulo);
 
-        painelLogo.add(logoLabel);
+        if (logoLabel != null) {
+            painelLogo.add(logoLabel);
+        }
         painelLogo.add(painelTextos);
 
         painel.add(painelLogo, BorderLayout.CENTER);
@@ -62,10 +78,10 @@ public class JanelaPrincipal extends JFrame {
         painel.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
         painel.setBackground(new Color(236, 240, 241));
 
-        JButton btnClientes = criarBotao("Gerenciar Clientes", "👥", "Cadastro e controle de clientes");
-        JButton btnFuncionarios = criarBotao("Gerenciar Funcionários", "👨‍💼", "Gestão da equipe de trabalho");
-        JButton btnVeiculos = criarBotao("Gerenciar Veículos", "🚗", "Controle de veículos cadastrados");
-        JButton btnSair = criarBotao("Sair do Sistema", "🚪", "Encerrar aplicação");
+        JButton btnClientes = criarBotao("Gerenciar Clientes", "clientes", "Cadastro e controle de clientes");
+        JButton btnFuncionarios = criarBotao("Gerenciar Funcionários", "funcionarios", "Gestão da equipe de trabalho");
+        JButton btnVeiculos = criarBotao("Gerenciar Veículos", "veiculos", "Controle de veículos cadastrados");
+        JButton btnSair = criarBotao("Sair do Sistema", "sair", "Encerrar aplicação");
 
         btnClientes.addActionListener(e -> new JanelaCrudCliente().setVisible(true));
         btnFuncionarios.addActionListener(e -> new JanelaCrudFuncionario().setVisible(true));
@@ -88,12 +104,11 @@ public class JanelaPrincipal extends JFrame {
         return painel;
     }
 
-    private JButton criarBotao(String texto, String icone, String descricao) {
+    private JButton criarBotao(String texto, String tipoIcone, String descricao) {
         JButton botao = new JButton();
         botao.setLayout(new BorderLayout());
 
-        JLabel lblIcone = new JLabel(icone, SwingConstants.CENTER);
-        lblIcone.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 32));
+        JLabel lblIcone = carregarIcone(tipoIcone);
 
         JLabel lblTexto = new JLabel(texto, SwingConstants.CENTER);
         lblTexto.setFont(new Font("Arial", Font.BOLD, 14));
@@ -109,8 +124,12 @@ public class JanelaPrincipal extends JFrame {
         painelTextos.add(Box.createVerticalStrut(3));
         painelTextos.add(lblDescricao);
 
-        botao.add(lblIcone, BorderLayout.NORTH);
-        botao.add(painelTextos, BorderLayout.CENTER);
+        if (lblIcone != null) {
+            botao.add(lblIcone, BorderLayout.NORTH);
+            botao.add(painelTextos, BorderLayout.CENTER);
+        } else {
+            botao.add(painelTextos, BorderLayout.CENTER);
+        }
 
         botao.setPreferredSize(new Dimension(200, 120));
         botao.setBackground(Color.WHITE);
@@ -138,63 +157,73 @@ public class JanelaPrincipal extends JFrame {
         return botao;
     }
 
+    private JLabel carregarIcone(String tipo) {
+        String urlString = URLS_ICONES.get(tipo);
+        if (urlString == null) {
+            System.err.println("Tipo de ícone não encontrado: " + tipo);
+            return null;
+        }
+
+        try {
+            URL iconURL = new URL(urlString);
+            ImageIcon originalIcon = new ImageIcon(iconURL);
+            
+            // Aguardar carregamento
+            while (originalIcon.getImageLoadStatus() == MediaTracker.LOADING) {
+                Thread.sleep(10);
+            }
+            
+            if (originalIcon.getIconWidth() > 0 && originalIcon.getImageLoadStatus() == MediaTracker.COMPLETE) {
+                Image img = originalIcon.getImage();
+                Image scaledImg = img.getScaledInstance(48, 48, Image.SCALE_SMOOTH);
+                System.out.println("Ícone " + tipo + " carregado de Icons8");
+                return new JLabel(new ImageIcon(scaledImg), SwingConstants.CENTER);
+            }
+        } catch (Exception e) {
+            System.err.println("Falha ao carregar " + tipo + " de Icons8: " + e.getMessage());
+        }
+        
+        System.err.println("Ícone " + tipo + " não pôde ser carregado");
+        return null;
+    }
+
     private void configurarIcone() {
         try {
             URL iconURL = getClass().getResource("/recursos/parking-icon.png");
             if (iconURL != null) {
                 ImageIcon icon = new ImageIcon(iconURL);
                 setIconImage(icon.getImage());
+                System.out.println("Ícone da janela carregado do arquivo local");
             } else {
-                criarIconePersonalizado();
+                System.err.println("Ícone local não encontrado");
             }
         } catch (Exception e) {
-            criarIconePersonalizado();
-        }
-    }
-
-    private void criarIconePersonalizado() {
-        try {
-            int size = 32;
-            java.awt.image.BufferedImage image = new java.awt.image.BufferedImage(size, size,
-                    java.awt.image.BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2d = image.createGraphics();
-
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-            g2d.setColor(new Color(52, 73, 94));
-            g2d.fillRoundRect(2, 2, size - 4, size - 4, 8, 8);
-
-            g2d.setColor(Color.WHITE);
-            g2d.setFont(new Font("Arial", Font.BOLD, 20));
-            FontMetrics fm = g2d.getFontMetrics();
-            String text = "P";
-            int x = (size - fm.stringWidth(text)) / 2;
-            int y = ((size - fm.getHeight()) / 2) + fm.getAscent();
-            g2d.drawString(text, x, y);
-
-            g2d.dispose();
-            setIconImage(image);
-        } catch (Exception e) {
-            System.err.println("Erro ao criar ícone personalizado: " + e.getMessage());
+            System.err.println("Erro ao carregar ícone da janela: " + e.getMessage());
         }
     }
 
     private JLabel criarLogoImagem() {
         try {
-            URL logoURL = getClass().getResource("/recursos/parking-logo.png");
-            if (logoURL != null) {
-                ImageIcon originalIcon = new ImageIcon(logoURL);
+            URL logoURL = new URL(LOGO_URL);
+            ImageIcon originalIcon = new ImageIcon(logoURL);
+            
+            // Aguardar carregamento
+            while (originalIcon.getImageLoadStatus() == MediaTracker.LOADING) {
+                Thread.sleep(10);
+            }
+            
+            if (originalIcon.getIconWidth() > 0 && originalIcon.getImageLoadStatus() == MediaTracker.COMPLETE) {
                 Image img = originalIcon.getImage();
                 Image scaledImg = img.getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+                System.out.println("✅ Logo carregado do Icons8");
                 return new JLabel(new ImageIcon(scaledImg));
             }
         } catch (Exception e) {
-            System.err.println("Erro ao carregar logo: " + e.getMessage());
+            System.err.println("Erro ao carregar logo do Icons8: " + e.getMessage());
         }
-
-        JLabel logoLabel = new JLabel("🅿️");
-        logoLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 48));
-        return logoLabel;
+        
+        System.err.println("Logo não pôde ser carregado");
+        return null;
     }
 
     public static void main(String[] args) {
