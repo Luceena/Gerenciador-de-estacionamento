@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class JanelaPrincipal extends JFrame {
 
-    // Mapa declarativo com URLs do Icons8
     private static final Map<String, String> URLS_ICONES = new HashMap<String, String>() {{
         put("clientes", "https://img.icons8.com/fluency/48/person-male.png");
         put("funcionarios", "https://img.icons8.com/fluency/48/manager.png");
@@ -16,7 +15,7 @@ public class JanelaPrincipal extends JFrame {
         put("sair", "https://img.icons8.com/fluency/48/exit.png");
     }};
 
-    private static final String LOGO_URL = "https://img.icons8.com/fluency/64/parking.png";
+    private static final String LOGO_URL = "//https://img.icons8.com/fluency/64/parking.png";
 
     public JanelaPrincipal() {
         inicializarComponentes();
@@ -168,7 +167,6 @@ public class JanelaPrincipal extends JFrame {
             URL iconURL = new URL(urlString);
             ImageIcon originalIcon = new ImageIcon(iconURL);
             
-            // Aguardar carregamento
             while (originalIcon.getImageLoadStatus() == MediaTracker.LOADING) {
                 Thread.sleep(10);
             }
@@ -207,7 +205,6 @@ public class JanelaPrincipal extends JFrame {
             URL logoURL = new URL(LOGO_URL);
             ImageIcon originalIcon = new ImageIcon(logoURL);
             
-            // Aguardar carregamento
             while (originalIcon.getImageLoadStatus() == MediaTracker.LOADING) {
                 Thread.sleep(10);
             }
