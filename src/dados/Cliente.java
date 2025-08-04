@@ -9,6 +9,9 @@ public class Cliente extends Pessoa implements DadosInterface{
     private String classificacao;
     private int idade;
     private boolean adimplente;
+    private double divida;
+    private double desconto;
+    private int tempoMinutos;
 
     public Cliente(ArrayList<Veiculo> veiculos, String nome, String cpf, int idade) {
         super(Objects.requireNonNull(nome, "Nome não pode ser nulo"),
@@ -91,6 +94,30 @@ public class Cliente extends Pessoa implements DadosInterface{
 
     public void setAdimplente(boolean adimplente) {
         this.adimplente = adimplente;
+    }
+
+    public Double getDivida(){
+        return this.divida;
+    }
+
+    public void setDivida(Double divida){
+        this.divida = divida;
+    }
+
+    public double getDesconto(){
+        return this.desconto;
+    }
+
+    public void setDesconto(double desconto){
+        this.desconto = desconto;
+    }
+
+    public int getTempo(){
+        return this.tempoMinutos;
+    }
+
+    public void setTempo(int minutos){
+        tempoMinutos = minutos;
     }
 
     @Override

@@ -19,11 +19,11 @@ public class ControladorEstacionamento {
         return instance;
     }
 
-    public void abrirCancela() {
+    public static void abrirCancela() {
         System.out.println("Abrir cancela");
     }
 
-    public void fecharCancela() {
+    public static void fecharCancela() {
         System.out.println("Fechar cancela");
     }
 

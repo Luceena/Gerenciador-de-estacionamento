@@ -5,8 +5,11 @@ import dados.DadosCliente;
 import dados.DadosInterface;
 import dados.Veiculo;
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import negocio.ControladorEstacionamento;
 
 public class RepositorioCliente implements InterfaceRepositorios {
     private static final String ARQUIVO = "clientes.csv";
@@ -118,5 +121,61 @@ public class RepositorioCliente implements InterfaceRepositorios {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public double cobrarEstacionamento(Cliente cliente){
+        double taxaEstacionamento = 15 + cliente.getTempo() % 60 * 10;
+        if(verificarDesconto(cliente)){
+            taxaEstacionamento *= cliente.getDesconto();
+        }
+        cliente.setDivida(taxaEstacionamento);
+        return cliente.getDivida();
+    }
+
+    public void pagarEstacionamento(Cliente cliente, double valor) throws InterruptedException{
+        double verificacao = cliente.getDivida() - valor;
+        if(verificacao <= 0){
+            ControladorEstacionamento.abrirCancela();
+            Thread.sleep(5000);
+            ControladorEstacionamento.fecharCancela();
+        }
+        else{
+            System.err.println("valor insuficiente");
+        }
+    }
+
+    public boolean verificarDesconto(Cliente cliente){
+        aplicarDesconto(cliente);
+        if(cliente.getDesconto() > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public void aplicarDesconto(Cliente cliente){
+        switch (cliente.getFrequencia()) {
+            case 5:
+                cliente.setDesconto(0.05);
+                break;
+            
+
+            case 10:
+                cliente.setDesconto(0.1);
+                break;
+
+
+            case 15:
+
+                cliente.setDesconto(0.2);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public void entradaEstacionamento(Cliente cliente){
+        LocalDateTime agora = LocalDateTime.now();
+        
     }
 }
